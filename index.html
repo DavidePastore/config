@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0">
+<title>Dispatch is yet another PHP micro-framework</title>
+<meta name="description" content="config() is an INI/JSON config file loader">
+<link rel="stylesheet" type="text/css" href="stylesheets/dispatch.css">
+</head>
+<body>
+
+<div id="markup"></div>
+<script id="markdown" type="text/markdown">
+config
+=
+
+<div class="gh-buttons">
+  <iframe
+    src="http://ghbtns.com/github-btn.html?user=noodlehaus&repo=config&type=watch&count=true"
+    allowtransparency="true"
+    frameborder="0"
+    scrolling="0"
+    width="100"
+    height="20"></iframe>
+  <iframe
+    src="http://ghbtns.com/github-btn.html?user=noodlehaus&repo=config&type=fork&count=true"
+    allowtransparency="true"
+    frameborder="0"
+    scrolling="0"
+    width="100"
+    height="20"></iframe>
+  <a
+    href="https://twitter.com/share"
+    class="twitter-share-button"
+    data-via="noodlehaus"
+    data-hashtags="php,micro,config,configuration"
+    data-txt="config is a json/ini config loader"
+    data-lang="en">Tweet</a>
+</div>
+
+`config()` is a JSON or INI file configuration loader. Config files
+are parsed and loaded depending on the file's extension name.
+
+## example
+
+Here's an example JSON file that we'll use as `config.json`.
+
+```json
+{
+  "app": {
+    "host": "localhost",
+    "port": 80,
+    "base": "/my/app"
+  },
+  "security": {
+    "secret": "s3cr3t-c0d3"
+  },
+  "debug": false
+}
+```
+
+Below's the code we'll use to work with this file.
+
+```php
+<?php
+// load the config
+$conf = config('config.json');
+
+// get the "debug" flag
+$debug = $conf->get('debug');
+
+// get the "secret" value under "security"
+$secret = $conf->get('security.secret');
+
+// try to get a value with a default as fallback
+$ttl = $conf->get('app.timeout', 3000);
+
+// get an entire config subarray
+$app = $conf->get('app');
+
+// set some values, creating nesting if necessary
+$conf->set('database.host', 'localhost');
+$conf->set('database.name', 'mydatabase');
+
+// you can also do subarray assignment
+$conf->set('database', array(
+  'host' => 'localhost',
+  'name' => 'mydatabase'
+));
+?>
+```
+
+## license
+MIT: <http://noodlehaus.mit-license.org>
+</script>
+<script src="javascripts/jquery.js"></script>
+<script src="javascripts/showdown/showdown.js"></script>
+<script>
+$(function () {
+  var conv = new Showdown.converter(),
+      html = conv.makeHtml($('#markdown').text());
+  $('#markup').html(html);
+  $('pre code').addClass('prettyprint');
+});
+</script>
+<script src="javascripts/prettify/run_prettify.js?skin=desert"></script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+</body>
+</html>

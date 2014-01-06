@@ -1,0 +1,57 @@
+body {
+  font-family: 'helvetica neue', sans-serif;
+  font-size: 14px;
+  line-height: 1.3;
+  margin: 0 auto;
+  padding: 20px;
+  width: 600px;
+  color: #222;
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 {
+  font-size: 2.5em;
+  text-transform: uppercase;
+  margin-bottom: .5em;
+}
+
+h2 {
+  margin-top: 1.25em;
+}
+
+h1,
+h2,
+h3 {
+  color: #900;
+}
+
+pre {
+  background: #111414;
+  padding: 8px;
+  overflow: auto;
+}
+
+pre code {
+  font-size: .857em;
+}
+
+a {
+  color: #a00;
+}
+
+hr {
+  border: 0;
+  width: 40px;
+  background: #000;
+  height: 1px;
+  margin: -10px auto 40px;
+}
+
+.gh-buttons {
+  margin-bottom: 2em;
+}
+
+.tweet-it {
+  text-align: center;
+}

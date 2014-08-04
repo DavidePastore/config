@@ -111,7 +111,7 @@ class Config implements \ArrayAccess
         $data = @parse_ini_file($path, true);
 
         if (!$data) {
-        throw new \Exception('INI parse error');
+            throw new \Exception('INI parse error');
         }
 
         return $data;
@@ -172,40 +172,6 @@ class Config implements \ArrayAccess
     }
 
     /**
-    * Function for setting configuration values, using
-    * either simple or nested keys.
-    *
-    * @param  string $key
-    * @param  mixed  $value
-    *
-    * @return void
-    */
-    public function set($key, $value) {
-
-        $segs = explode('.', $key);
-        $root = &$this->data;
-
-        // Look for the key, creating nested keys if needed
-        while ($part = array_shift($segs)) {
-            if (!isset($root[$part]) && count($segs)) {
-                $root[$part] = array();
-            }
-            $root = &$root[$part];
-        }
-
-        // Assign value at target node
-        $root = $value;
-
-        // Invalidate or create cache entry
-        if ($root === null) {
-            unset($this->cache[$key]);
-        }
-        else {
-            $this->cache[$key] = $root;
-        }
-    }
-
-    /**
      * ArrayAccess Methods
      */
 
@@ -243,7 +209,7 @@ class Config implements \ArrayAccess
      */
     public function offsetSet($offset, $value)
     {
-        $this->set($offset, $value);
+        throw new \Exception("Config instances are read-only");
     }
 
     /**
@@ -255,7 +221,7 @@ class Config implements \ArrayAccess
      */
     public function offsetUnset($offset)
     {
-        $this->set($offset, NULL);
+        throw new \Exception("Config instances are read-only");
     }
 
 

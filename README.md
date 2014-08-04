@@ -1,8 +1,11 @@
 # config
 
-`config()` is a file configuration loader that supports PHP,
+`Config` is a file configuration loader that supports PHP,
 JSON and INI files. Files are parsed and loaded depending on
 the file's extension name.
+
+`Config` instances are **read-only**, as changes to configurations
+should happen on the file first.
 
 Some examples of valid configuration files are [below](#examples)
 

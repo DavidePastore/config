@@ -201,58 +201,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers       Noodlehaus\Config::set
-     * @dataProvider providerConfig
-     */
-    public function testSet($config)
-    {
-        $config->set('region', 'apac');
-        $this->assertEquals('apac', $config->get('region'));
-    }
-
-    /**
-     * @covers       Noodlehaus\Config::set
-     * @dataProvider providerConfig
-     */
-    public function testSetNestedKey($config)
-    {
-        $config->set('location.country', 'Singapore');
-        $this->assertEquals('Singapore', $config->get('location.country'));
-    }
-
-    /**
-     * @covers       Noodlehaus\Config::set
-     * @dataProvider providerConfig
-     */
-    public function testSetArray($config)
-    {
-        $config->set('database', array(
-            'host' => 'localhost',
-            'name' => 'mydatabase'
-        ));
-        $this->assertTrue(is_array($config->get('database')));
-        $this->assertEquals('localhost', $config->get('database.host'));
-    }
-
-    /**
-     * @covers       Noodlehaus\Config::set
-     * @dataProvider providerConfig
-     */
-    public function testSetAndUnsetArray($config)
-    {
-        $config->set('database', array(
-            'host' => 'localhost',
-            'name' => 'mydatabase'
-        ));
-        $this->assertTrue(is_array($config->get('database')));
-        $this->assertEquals('localhost', $config->get('database.host'));
-        $config->set('database.host', null);
-        $this->assertNull($config->get('database.host'));
-        $config->set('database', null);
-        $this->assertNull($config->get('database'));
-    }
-
-    /**
      * @covers       Noodlehaus\Config::offsetGet
      * @dataProvider providerConfig
      */
@@ -286,26 +234,6 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
     public function testOffsetExistsReturnsFalseOnNonexistentKey($config)
     {
         $this->assertFalse(isset($config['database']));
-    }
-
-    /**
-     * @covers       Noodlehaus\Config::offsetSet
-     * @dataProvider providerConfig
-     */
-    public function testOffsetSet($config)
-    {
-        $config['newkey'] = 'newvalue';
-        $this->assertEquals('newvalue', $config['newkey']);
-    }
-
-    /**
-     * @covers       Noodlehaus\Config::offsetUnset
-     * @dataProvider providerConfig
-     */
-    public function testOffsetUnset($config)
-    {
-        unset($config['application']);
-        $this->assertNull($config['application']);
     }
 
     /**
